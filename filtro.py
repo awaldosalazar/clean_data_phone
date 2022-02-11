@@ -3,10 +3,6 @@ from dictionario import dictionary
 import time
 
 
-print(dictionary['QRO'])
-time.sleep(5)
-print(dictionary['QROO'])
-
 def initial_excel():
     new_excel = Workbook()
     
@@ -26,24 +22,36 @@ columnas = sheet.max_row
 contador = 2
 new_excel = initial_excel()
 
-
-def handleCity(full_city):
-    newArray = full_city.split(',')
+# Separate the city from the state key 
+def handleCity(fullCity):
+    newArray = fullCity.split(',')
     return newArray
-    
+
+# Look for the corresponding state according to its key
+def handleSatet(keyState):
+    keydictionary = dictionary.keys()
+    print(keydictionary)
+    if keyState in keydictionary:
+        print(f'si esta {keyState}')
+    else:
+        print(f'No lo encontramos {keyState}')
+        
+    # print(dictionary)
 
 while contador <= columnas:
     fullCity = sheet[f'A{contador}'].value
     fullCity = handleCity(fullCity)
-    print(fullCity[0])
+    nameState = handleSatet(fullCity[1])
+    # print(fullCity[0])
     new_excel.worksheets[0][f'A{contador}'].value = fullCity[0]
     new_excel.worksheets[0][f'B{contador}'].value = fullCity[1]
     new_excel.worksheets[0][f'C{contador}'].value = fullCity[1]
     new_excel.worksheets[0][f'D{contador}'].value = sheet[f'B{contador}'].value
     new_excel.worksheets[0][f'E{contador}'].value = sheet[f'C{contador}'].value
     new_excel.worksheets[0][f'F{contador}'].value = 'Mexico'
-    print(contador)
+    # print(contador)
     contador += 1
+    time.sleep(2)
     
 # new_excel.save(f'phone_clean_data.xlsx')
 

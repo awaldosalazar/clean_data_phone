@@ -30,5 +30,6 @@ dictionary = {
     'TLAX':'Tlaxcala',
     'VER':'Veracruz',
     'YUC':'Yucatán',
-    'ZAC':'Zacatecas'
+    'ZAC':'Zacatecas',
+    'EXTRA':'Y ÁREA METROPOLITANA'
 }
