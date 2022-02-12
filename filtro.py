@@ -61,5 +61,3 @@ while contador <= columnas:
     # time.sleep(2)
     
 new_excel.save(f'phone_clean_data.xlsx')
-
-
