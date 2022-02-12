@@ -29,30 +29,37 @@ def handleCity(fullCity):
 
 # Look for the corresponding state according to its key
 def handleSatet(keyState):
-    keydictionary = dictionary.keys()
-    print(keydictionary)
-    if keyState in keydictionary:
-        print(f'si esta {keyState}')
+    dato  = getState(keyState)
+    
+    if dato:
+        print(f'Tuvimos exito con {dato}')
+        return dato
     else:
-        print(f'No lo encontramos {keyState}')
-        
-    # print(dictionary)
+        # print(f'Busqueda extensa de: {keyState}')
+        partition = keyState.split(' ')
+        dato = getState(partition[0])
+        print(f'Tuvimos exito con {dato}')
+        return dato
 
+def getState(KeyState):
+    return dictionary.get(KeyState,'')
+   
+   
 while contador <= columnas:
     fullCity = sheet[f'A{contador}'].value
     fullCity = handleCity(fullCity)
-    nameState = handleSatet(fullCity[1])
-    # print(fullCity[0])
+    nameState = handleSatet(fullCity[1].strip())
+    
     new_excel.worksheets[0][f'A{contador}'].value = fullCity[0]
-    new_excel.worksheets[0][f'B{contador}'].value = fullCity[1]
+    new_excel.worksheets[0][f'B{contador}'].value = nameState
     new_excel.worksheets[0][f'C{contador}'].value = fullCity[1]
     new_excel.worksheets[0][f'D{contador}'].value = sheet[f'B{contador}'].value
     new_excel.worksheets[0][f'E{contador}'].value = sheet[f'C{contador}'].value
     new_excel.worksheets[0][f'F{contador}'].value = 'Mexico'
     # print(contador)
     contador += 1
-    time.sleep(2)
+    # time.sleep(2)
     
-# new_excel.save(f'phone_clean_data.xlsx')
+new_excel.save(f'phone_clean_data.xlsx')
 
 
